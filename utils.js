@@ -79,3 +79,27 @@ function makeTimeString(a) {
 function rndPick(a) {
     return a[Math.floor(Math.random() * a.length)];
 }
+
+function vec(x, y) {
+    return { x, y };
+}
+
+function vec2(mag, angle) {
+    return { x: mag * Math.cos(angle), y: mag * Math.sin(angle) };
+}
+
+function vecAdd(v1, v2) {
+    return { x: v1.x + v2.x, y: v1.y + v2.y };
+}
+
+function vecScale(v, s) {
+    return { x: v.x * s, y: v.y * s };
+}
+
+function vecLerp(v1, v2, t) {
+    return { x: lerp(v1.x, v2.x, t), y: lerp(v1.y, v2.y, t) };
+}
+
+function vecDecomp(v) {
+    return { mag: Math.sqrt(v.x * v.x + v.y * v.y), angle: Math.atan2(v.y, v.x) };
+}

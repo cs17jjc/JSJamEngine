@@ -58,8 +58,11 @@ var spritesheets = new Map();
 Array.from(document.images).forEach(i => {
     if (i.src.includes("Sheets")) {
         var texSheet = new TextureSheet(i, 16);
+        //Specify how to chop up the texture sheet using defineSprite
         switch (i.id) {
-            default: break;
+            default:
+            //eg texSheet.defineSprite("sprite1", 0, 0, 1, 1);
+                break;
         }
         spritesheets.set(i.id, texSheet);
     } else {
