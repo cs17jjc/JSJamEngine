@@ -12,7 +12,7 @@ class RenderScene {
     }
 
     static renderGame(scene, ctx) {
-        ctx.fillStyle = "#FFFFFF"
+        ctx.fillStyle = "#FFFFFF";
         ctx.fillRect(0, 0, rWidth, rHeight);
 
         scene.data.objects.all().forEach(o => this.renderObject(scene, o, ctx));
@@ -22,23 +22,19 @@ class RenderScene {
 
     static renderObject(scene, obj, ctx) {
         switch (obj.objClass) {
-            case 'Square':
-                RenderScene.renderSquare(scene, obj.data, ctx);
+            case 'Polygon':
+                RenderScene.renderPolygon(scene, obj.data, ctx);
                 break;
         }
     }
 
-    static renderSquare(scene, obj, ctx) {
-        ctx.translate(obj.body.pos.x + obj.body.vertsCent.x, obj.body.pos.y + obj.body.vertsCent.y);
-        ctx.rotate(obj.body.angle);
+    static renderPolygon(scene, obj, ctx) {
         ctx.fillStyle = "#000000";
         ctx.beginPath();
-        ctx.moveTo(obj.body.verts[0].x, obj.body.verts[0].y);
-        obj.body.verts.slice(1).forEach(v => ctx.lineTo(v.x, v.y));
+        ctx.moveTo(obj.body.vertices[0].x, obj.body.vertices[0].y);
+        obj.body.vertices.slice(1).forEach(v => ctx.lineTo(v.x, v.y));
         ctx.closePath();
         ctx.fill();
-        ctx.rotate(-obj.body.angle);
-        ctx.translate(-obj.body.pos.x - obj.body.vertsCent.x, -obj.body.pos.y - obj.body.vertsCent.y);
     };
 
     static renderAnimObject(x, y, w, h, anim, ctx) {

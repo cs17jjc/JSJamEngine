@@ -7,18 +7,22 @@ class Create {
         return { imgSource, sourceType, frames, rate, currentFrame: 0, lastFrameTime: frame }
     }
 
-    static convexBody(pos, verts, mass) {
-        var vertsCent = vecScale(verts.reduce((acc, v) => vecAdd(acc, v), vec(0, 0)), 1 / verts.length);
-        return { pos, verts, vertsCent, mass, vel: vec(0, 0), angle: 0 };
-    }
-
-    static square(x, y, width, height) {
-        return this.gameObject("Square", { body: this.convexBody(vec(x, y), this.squareVerts(width, height), 1) });
+    static polygon(x, y, verts, opts) {
+        return this.gameObject("Polygon", { body: Bodies.fromVertices(x, y, verts, opts) });
     }
 
     static squareVerts(width, height) {
-        var hW = width;
+        var hW = width / 2;
         var hH = height / 2;
         return [vec(-hW, -hH), vec(hW, -hH), vec(hW, hH), vec(-hW, hH)];
+    }
+
+    static regPolyVerts(radius, nPoints) {
+        var verts = [];
+        for (var i = 0; i < nPoints; i++) {
+            var angle = 2 * Math.PI * i / nPoints;
+            verts.push(vec2(radius, angle));
+        }
+        return verts;
     }
 }

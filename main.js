@@ -1,3 +1,9 @@
+// module aliases
+var Engine = Matter.Engine,
+    Bodies = Matter.Bodies,
+    Composite = Matter.Composite,
+    Body = Matter.Body;
+
 //Configure canvas sizes
 var dspCont1Style = window.getComputedStyle(document.getElementById("c1"));
 var dspCont2 = document.getElementById("c2");
@@ -8,8 +14,8 @@ displayContext.mozImageSmoothingEnabled = false;
 displayContext.imageSmoothingEnabled = false;
 
 var renderCanvas = document.createElement("canvas");
-renderCanvas.width = 1920;
-renderCanvas.height = 1080;
+renderCanvas.width = 960;
+renderCanvas.height = 540;
 var ctx = renderCanvas.getContext("2d");
 ctx.mozImageSmoothingEnabled = false;
 ctx.imageSmoothingEnabled = false;
@@ -79,9 +85,9 @@ var scene = Scene.createGame();
 
 function onNextFrame() {
 
-    UpdateScene.update(scene);
-    RenderScene.render(scene, ctx);
 
+    RenderScene.render(scene, ctx);
+    UpdateScene.update(scene);
     displayContext.drawImage(renderCanvas, 0, 0, displayCanvas.width, displayCanvas.height);
 
 

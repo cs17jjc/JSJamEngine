@@ -1,8 +1,9 @@
 class ObjectContainer {
 
-    constructor() {
+    constructor(world) {
         this.list = [];
         this.map = new Map();
+        this.world = world;
     }
 
     add(obj, id = null) {
@@ -13,6 +14,9 @@ class ObjectContainer {
         }
         this.list.push(obj);
         this.map.set(obj.id, obj);
+        if (obj.data.body != null) {
+            Composite.add(this.world, obj.data.body);
+        }
     }
 
     removeDead() {
